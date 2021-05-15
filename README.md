@@ -1,6 +1,6 @@
 # visual-xml-schema-editor README
 
-This is the README for your extension "visual-xml-schema-editor". After writing up a brief description, we recommend including the following sections.
+Visual XML Schema Editor extension for [Visual Studio Code](https://code.visualstudio.com/).
 
 ## Features
 

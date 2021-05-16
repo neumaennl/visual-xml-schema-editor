@@ -1,6 +1,11 @@
 import * as vscode from 'vscode';
 import { getNonce } from './util';
-
+// eslint-disable-next-line @typescript-eslint/naming-convention
+var Jsonix = require('jsonix').Jsonix;
+var XSD = require('w3c-schemas').XSD_1_0;
+var context = new Jsonix.Context([XSD]);
+var unmarshaller = context.createUnmarshaller();
+var marshaller = context.createMarshaller();
 /**
  * Provider for cat scratch editors.
  * 
@@ -85,6 +90,9 @@ export class VisualXsdEditorProvider implements vscode.CustomTextEditorProvider 
 		});
 
 		updateWebview();
+		
+		var schema = unmarshaller.unmarshalString(document.getText());
+		console.log(schema);
 	}
 
 	/**

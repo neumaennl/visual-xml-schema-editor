@@ -1,11 +1,11 @@
 import * as vscode from 'vscode';
 import { getNonce } from './util';
-// eslint-disable-next-line @typescript-eslint/naming-convention
-var Jsonix = require('jsonix').Jsonix;
-var XSD = require('w3c-schemas').XSD_1_0;
-var context = new Jsonix.Context([XSD]);
-var unmarshaller = context.createUnmarshaller();
-var marshaller = context.createMarshaller();
+import { Jsonix } from 'jsonix';
+import { XSD_1_0 } from 'w3c-schemas';
+var context = new Jsonix.Context([XSD_1_0]);
+//TODO: typing for Schema
+var unmarshaller = context.createUnmarshaller<any>();
+var marshaller = context.createMarshaller<any>();
 /**
  * Provider for cat scratch editors.
  * 
@@ -93,6 +93,10 @@ export class VisualXsdEditorProvider implements vscode.CustomTextEditorProvider 
 		
 		var schema = unmarshaller.unmarshalString(document.getText());
 		console.log(schema);
+		schema.value.element.push({name: 'test', type: {namespaceURI:'http://www.w3.org/2001/XMLSchema', localPart: 'string'}});
+		var schemaAsXML = marshaller.marshalString(schema);
+		console.log(schemaAsXML);
+		
 	}
 
 	/**

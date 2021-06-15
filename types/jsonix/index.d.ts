@@ -7,24 +7,24 @@ declare module 'jsonix' {
         namespace Util {
             function extend(destination: object, source: object): object;
             namespace Type {
-                function exists(value: any): boolean;
-                function isString(value: any): boolean;
-                function isBoolean(value: any): boolean;
-                function isObject(value: any): boolean;
-                function isFunction(value: any): boolean;
-                function isNumber(value: any): boolean;
-                function isNumberOrNaN(value: any): boolean;
-                function isNaN(value: any): boolean;
-                function isArray(value: any): boolean;
-                function isDate(value: any): boolean;
-                function isRegExp(value: any): boolean;
-                function isNode(value: any): boolean;
-                function isEqual(a: any, b: any, report?: (message: string) => void): boolean;
+                function exists(value: unknown): boolean;
+                function isString(value: unknown): value is string;
+                function isBoolean(value: unknown): value is boolean;
+                function isObject(value: unknown): value is object;
+                function isFunction(value: unknown): value is Function;
+                function isNumber(value: unknown): value is number;
+                function isNumberOrNaN(value: unknown): value is number;
+                function isNaN(value: unknown): boolean;
+                function isArray(value: unknown): boolean;
+                function isDate(value: unknown): value is Date;
+                function isRegExp(value: unknown): value is RegExp;
+                function isNode(value: unknown): boolean;
+                function isEqual(a: unknown, b: unknown, report?: (message: string) => void): boolean;
                 function cloneObject(source: object, target?: object): object;
                 function defaultValue(args?: any[]): any | undefined;
             }
             namespace NumberUtils {
-                function isInteger(value: any): boolean;
+                function isInteger(value: unknown): boolean;
             }
             namespace StringUtils {
                 function trim(str: string): string;
@@ -33,16 +33,16 @@ declare module 'jsonix' {
                 function splitBySeparatorChars(str: string, separatorChars: string): string[];
             }
             namespace Ensure {
-                function ensureBoolean(value: any): void;
-                function ensureString(value: any): void;
-                function ensureNumber(value: any): void;
-                function ensureNumberOrNaN(value: any): void;
-                function ensureInteger(value: any): void;
-                function ensureDate(value: any): void;
-                function ensureObject(value: any): void;
-                function ensureArray(value: any): void;
-                function ensureFunction(value: any): void;
-                function ensureExists(value: any): void;
+                function ensureBoolean(value: unknown): asserts value is boolean;
+                function ensureString(value: unknown): asserts value is string;
+                function ensureNumber(value: unknown): asserts value is number;
+                function ensureNumberOrNaN(value: unknown): asserts value is number;
+                function ensureInteger(value: unknown): void;
+                function ensureDate(value: unknown): asserts value is Date;
+                function ensureObject(value: unknown): asserts value is object;
+                function ensureArray(value: unknown): void;
+                function ensureFunction(value: unknown): asserts value is Function;
+                function ensureExists(value: unknown): void;
             }
         }
         namespace XML {

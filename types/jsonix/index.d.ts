@@ -210,7 +210,7 @@ declare module 'jsonix' {
             abstract class TypeInfo extends Class {
                 module: Module | null;
                 name: string | null;
-                baseTypeInfo: TypeInfo | null;
+                baseTypeInfo: string|TypeInfo | null;
                 constructor();
                 isBasedOn(typeInfo: TypeInfo): boolean;
             }
@@ -260,7 +260,20 @@ declare module 'jsonix' {
             }
             interface ClassInfo extends Jsonix.Model.TypeInfo, Jsonix.Mapping.Styled { }
             class EnumLeafInfo extends TypeInfo {
-                //TODO: continue here
+                name: string;
+                baseTypeInfo: string|TypeInfo;
+                entries: { [key: string]: string|object};
+                keys: string[];
+                values: (string|object)[];
+                built: boolean;
+                constructor(mapping: object);
+                build(context: Context): void;
+                unmarshal(context: Context, input: Jsonix.XML.Input, scope?: Jsonix.Model.TypeInfo): string|object;
+                marshal(value: string|object, context: Context, output: Jsonix.XML.Output, scope?: Jsonix.Model.TypeInfo): void;
+                reprint(value: string|object, context: Context, output: Jsonix.XML.Output, scope?: Jsonix.Model.TypeInfo): string;
+                print(value: string|object, context: Context, output: Jsonix.XML.Output, scope?: Jsonix.Model.TypeInfo): string;
+                parse(text: string, context?: Context, input?: Jsonix.XML.Input, scope?: Jsonix.Model.TypeInfo): string|object;
+                isInstance(value: string|object, context?: Context, scope?: Jsonix.Model.TypeInfo): boolean;
             }
             class ElementInfo extends Class {
                 //TODO: continue here
